@@ -1,0 +1,4 @@
+{:deps
+ {clojure.java-time/clojure.java-time {:mvn/version "1.4.2"}
+  aoc-23-util/aoc-23-util {:local/root "../util"}}
+ :paths ["src" "resources"]}
