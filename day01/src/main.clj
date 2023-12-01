@@ -11,24 +11,24 @@
 (defn parse-nums-2
   [line]
   (let [matchers (concat (keys num-str) (vals num-str))]
-       (loop [sub line
-              result []]
-         (if (string/blank? sub)
-           result
-           (let [match (some #(when (string/starts-with? sub %) %) matchers)]
-             (recur
-              (subs sub 1)
-              (if-not match
-                result
-                (conj result match))))))))
+    (loop [sub line
+           result []]
+      (if (string/blank? sub)
+        result
+        (let [match (some #(when (string/starts-with? sub %) %) matchers)]
+          (recur
+           (subs sub 1)
+           (if-not match
+             result
+             (conj result match))))))))
 
 (defn parse-line
   [part line]
   (let [nums (mapv
-               #(or (get num-str %) %)
-               (if (= part 2)
-                 (parse-nums-2 line)
-                 (parse-nums-1 line)))
+              #(or (get num-str %) %)
+              (if (= part 2)
+                (parse-nums-2 line)
+                (parse-nums-1 line)))
         first (first nums)
         last (last nums)]
     (Integer/parseInt (str first last))))
