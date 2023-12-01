@@ -22,17 +22,13 @@
                 result
                 (conj result match))))))))
 
-(defn parse-nums
-  [part line]
-  (mapv
-   #(or (get num-str %) %)
-   (if (= part 2)
-     (parse-nums-2 line)
-     (parse-nums-1 line))))
-
 (defn parse-line
   [part line]
-  (let [nums (parse-nums part line)
+  (let [nums (mapv
+               #(or (get num-str %) %)
+               (if (= part 2)
+                 (parse-nums-2 line)
+                 (parse-nums-1 line)))
         first (first nums)
         last (last nums)]
     (Integer/parseInt (str first last))))
