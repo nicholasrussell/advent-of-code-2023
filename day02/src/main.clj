@@ -31,22 +31,50 @@
   [constraint pull]
   (every? true? (map (partial meets-constraint constraint pull) [:red :green :blue])))
 
-(defn solve
-  [lines constraint]
-  (->> lines
-       (map parse-game)
+(defn solve-1
+  [games constraint]
+  (->> games
        (filter (fn [game] (every? true? (map (partial possible-game constraint) (:pulls game)))))
        (map :game)
+       (reduce + 0)))
+
+(defn fmap
+  [f m]
+  (into (empty m) (for [[k v] m] [k (f v)])))
+
+(defn max-cubes
+  [game]
+  (->> game
+       :pulls
+       (into [] cat)
+       (group-by key)
+       (fmap (fn [row]
+               (->> row
+                    (map second)
+                    (apply max))))))
+
+(defn power-cubes
+  [cube-set]
+  (apply * (map #(% cube-set) [:red :green :blue])))
+
+(defn solve-2
+  [games]
+  (->> games
+       (map max-cubes)
+       (map power-cubes)
        (reduce + 0)))
 
 ;; Part 1:
 ;;  8
 ;;  2679
 ;; Part 2:
-;;  
-;;  
+;;  2286
+;;  77607
 (defn -main
   [& args]
-  (let [part-1-input (file-util/lazy-load-resource "input.txt")]
+  (let [input (file-util/lazy-load-resource "input.txt")
+        games (map parse-game input)]
     (println "Part 1:")
-    (println (solve part-1-input {:red 12 :green 13 :blue 14}))))
+    (println (solve-1 games {:red 12 :green 13 :blue 14}))
+    (println "Part 2:")
+    (println (solve-2 games))))
