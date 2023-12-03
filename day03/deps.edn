@@ -1,0 +1,3 @@
+{:deps
+ {aoc-23-util/aoc-23-util {:local/root "../util"}}
+ :paths ["src" "resources"]}
