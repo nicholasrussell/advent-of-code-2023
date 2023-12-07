@@ -1,4 +1,4 @@
-# Day 04
+# Day 06
 
 ## Usage
 `clj -M -m main`
