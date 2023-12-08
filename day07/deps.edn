@@ -1,0 +1,4 @@
+{:deps
+ {aoc-23-util/aoc-23-util {:local/root "../util"}
+  org.clojure/math.numeric-tower {:mvn/version "0.0.5"}}
+ :paths ["src" "resources"]}
