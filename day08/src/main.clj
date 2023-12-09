@@ -96,7 +96,7 @@
 ;;  14681
 ;; Part 2:
 ;;  6
-;;  < 84314908087948949100671
+;;  14321394058031
 (defn -main
   [& args]
   (let [input (file-util/lazy-load-resource "input.txt")
